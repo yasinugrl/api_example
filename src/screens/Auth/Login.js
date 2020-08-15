@@ -4,18 +4,14 @@ import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { Input, Button } from '../../components'
 import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { login } from '../../actions'
+import { login } from '../../actions'
+import { StackActions } from '@react-navigation/native';
+
 
 const Login = (props) => {
     const [email, setEmail] = useState('test51@test.com')
     const [password, setPassword] = useState('123456')
 
-    useEffect(() => {
-        console.log('User DAta: ', props);
-        if(props.user) {
-            props.navigation.navigate('Home')
-        }
-    }, [props.user])
 
     return (
         <ScrollView>
@@ -46,7 +42,7 @@ const Login = (props) => {
                         const params = {
                             email,
                             password
-                        } 
+                        }
                         props.login(params)
 
                     }}
@@ -70,4 +66,4 @@ const mapStateToProps = ({ authResponse }) => {
     return { loading, user };
 };
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login })(Login);

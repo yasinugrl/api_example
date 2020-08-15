@@ -12,13 +12,6 @@ const Login = (props) => {
     const [email, setEmail] = useState('test34@test.com')
     const [password, setPassword] = useState('123456')
 
-    useEffect(() => {
-        console.log('User DAta: ', props);
-        if(props.user) {
-            props.navigation.navigate('Home')
-        }
-    }, [props.user])
-
     return (
         <ScrollView>
             <View style={{
@@ -66,8 +59,6 @@ const Login = (props) => {
                         props.register(params)
                     }}
                 />
-
-                {props.loading && <ActivityIndicator size='large' style={{ marginTop: 30 }} />}
 
             </View>
         </ScrollView>
