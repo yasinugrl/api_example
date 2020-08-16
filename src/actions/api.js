@@ -25,7 +25,7 @@ export const post = (url, params, dispatch, start, success, faild) => {
       }
       }).then((response) => {
         console.log('Gelen POST Başarılı: => ', response.data );
-        dispatch({  type: success, payload: response.data  })
+        dispatch({  type: success, payload: method == 'removeCharacter' ?  params.id : response.data  })
 
         if(method == 'login' || method == 'register'){
           RootNavigation.replace('Home')

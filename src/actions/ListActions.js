@@ -8,6 +8,10 @@ import {
     ADD_ITEM_START,
     ADD_ITEM_SUCCESS,
     ADD_ITEM_FAILD,
+
+    REMOVE_ITEM_START,
+    REMOVE_ITEM_SUCCESS,
+    REMOVE_ITEM_FAILD,
 } from './types'
 
 import { Alert } from 'react-native'
@@ -37,6 +41,20 @@ export const postData = (params) => {
             ADD_ITEM_START,
             ADD_ITEM_SUCCESS,
             ADD_ITEM_FAILD
+        )
+    }
+}
+
+
+export const removeData = (params) => {
+    return (dispatch) => {
+        post(
+            BASE_URL.concat('/api/removeCharacter'),
+            params,
+            dispatch,
+            REMOVE_ITEM_START,
+            REMOVE_ITEM_SUCCESS,
+            REMOVE_ITEM_FAILD
         )
     }
 }

@@ -7,11 +7,16 @@ import {
     ADD_ITEM_SUCCESS,
     ADD_ITEM_FAILD,
 
+    REMOVE_ITEM_START,
+    REMOVE_ITEM_SUCCESS,
+    REMOVE_ITEM_FAILD,
+
 } from '../actions/types';
 
 const INITIAL_STATE = {
     loadingCharacter: false,
     loadingAddItem: false,
+    loadingRemoveItem: false,
     characters: []
 };
 export default (state = INITIAL_STATE, action) => {
@@ -58,6 +63,29 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 loadingAddItem: false,
+            };
+
+
+        case REMOVE_ITEM_START:
+            return {
+                ...state,
+                loadingRemoveItem: true,
+            };
+
+
+        case REMOVE_ITEM_SUCCESS:
+            const id = action.payload
+            const newData = state.characters.filter((dt) => dt._id != id)
+            return {
+                ...state,
+                loadingRemoveItem: false,
+                characters: newData
+            };
+
+        case REMOVE_ITEM_FAILD:
+            return {
+                ...state,
+                loadingRemoveItem: false,
             };
 
         default:

@@ -23,6 +23,11 @@ export const ADD_ITEM_SUCCESS = 'add_item_success';
 export const ADD_ITEM_FAILD = 'add_item_faild';
 
 
+export const REMOVE_ITEM_START = 'remove_item_start';
+export const REMOVE_ITEM_SUCCESS = 'remove_item_success';
+export const REMOVE_ITEM_FAILD = 'remove_item_faild';
+
+
 export const LOCAL_AUTH_ID = 'local_auth_id';
 
 
