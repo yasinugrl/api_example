@@ -14,7 +14,7 @@ import * as RootNavigation from '../../RootNavigation';
 
 
 const Login = (props) => {
-    const [email, setEmail] = useState('test51@test.com')
+    const [email, setEmail] = useState('Test51@test.com')
     const [password, setPassword] = useState('123456')
 
     const [loading, setLoading] = useState(true)
@@ -63,7 +63,7 @@ const Login = (props) => {
                         loading={props.loading}
                         onPress={() => {
                             const params = {
-                                email,
+                                email: email.toLowerCase(),
                                 password
                             }
                             props.login(params)

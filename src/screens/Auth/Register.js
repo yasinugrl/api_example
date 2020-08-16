@@ -5,7 +5,7 @@ import { Input, Button } from '../../components'
 import { connect } from 'react-redux';
 import { register } from '../../actions'
 
-const Login = (props) => {
+const Register = (props) => {
 
     const [firstName, setFirstname] = useState('Kodluyoruz')
     const [lastName, setLastname] = useState('34')
@@ -71,4 +71,4 @@ const mapStateToProps = ({ authResponse }) => {
     return { loading, user };
 };
 
-export default connect(mapStateToProps, { register })(Login);
+export default connect(mapStateToProps, { register })(Register);

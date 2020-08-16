@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, Image} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './screens/Auth/Login'
 import Register from './screens/Auth/Register'
 import Home from './screens/Home/Home'
+import AddItem from './screens/Home/AddItem'
+
+
 import { navigationRef } from './RootNavigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import { LOCAL_AUTH_ID, USER } from './actions/types';
@@ -39,30 +42,36 @@ function Router(props) {
                         title: 'Home',
                         headerLeft: () => (
                             <TouchableOpacity
-                            onPress={() => {
-                                AsyncStorage.removeItem(LOCAL_AUTH_ID)
-                                USER.token = null
-                                navigation.replace('Login')
-                            }}
-                            style={{ 
-                                marginRight: 20
-                            }}
+                                onPress={() => {
+                                    AsyncStorage.removeItem(LOCAL_AUTH_ID)
+                                    USER.token = null
+                                    navigation.replace('Login')
+                                }}
+                                style={{
+                                    marginRight: 20
+                                }}
                             >
-                                <Image source={require('./img/logout.png')} style={{ width: 20, height: 20, margin: 10}} />
+                                <Image source={require('./img/logout.png')} style={{ width: 20, height: 20, margin: 10 }} />
                             </TouchableOpacity>
-                          ),
-                        // headerRight: () => (
-                        //     <TouchableOpacity
-                        //     onPress={() => navigation.navigate('ListDetail')}
-                        //     style={{ 
-                        //         marginRight: 20
-                        //     }}
-                        //     >
-                        //         <Text style={{ fontSize: 30}}>+</Text>
-                        //     </TouchableOpacity>
-                        //   ),
+                        ),
+                        headerRight: () => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('AddItems')}
+                                style={{
+                                    marginRight: 20
+                                }}
+                            >
+                                <Text style={{ fontSize: 30 }}>+</Text>
+                            </TouchableOpacity>
+                        ),
                     })}
-                    
+
+                />
+
+                <Stack.Screen
+                    name="AddItems"
+                    component={AddItem}
+                    options={{ title: 'Add Characters' }}
                 />
 
 

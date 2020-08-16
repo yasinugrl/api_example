@@ -11,22 +11,26 @@ const Home = (props) => {
     }, [])
 
 
-    const renderItem = ({ item }) => (
-        <View style={{ height: 100, margin: 10, flexDirection: 'row', backgroundColor: 'white', }}>
-            <Image
-                defaultSource={require('../../img/dummy.png')}
-                source={{ uri: item.image }}
-                style={{ height: 100, width: 100 }}
-                resizeMode='contain'
-            />
-            <View style={{ padding: 10 }}>
-                <Text style={styles.text}>Name: {item.name}</Text>
-                <Text style={styles.text}>Status: {item.status}</Text>
-                <Text style={styles.text}>Species: {item.species}</Text>
-            </View>
+    const renderItem = ({ item }) => {
+        const source = item.image.uri ? item.image : { uri: item.image }
+        return(
 
-        </View>
-    );
+            <View style={{ height: 100, margin: 10, flexDirection: 'row', backgroundColor: 'white', }}>
+                <Image
+                    defaultSource={require('../../img/dummy.png')}
+                    source={source}
+                    style={{ height: 100, width: 100 }}
+                    resizeMode='contain'
+                />
+                <View style={{ padding: 10 }}>
+                    <Text style={styles.text}>Name: {item.name}</Text>
+                    <Text style={styles.text}>Status: {item.status}</Text>
+                    <Text style={styles.text}>Species: {item.species}</Text>
+                </View>
+    
+            </View>
+        );
+    }
 
     return (
         <View style={{ flex: 1 }}>

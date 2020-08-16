@@ -19,7 +19,10 @@ export const post = (url, params, dispatch, start, success, faild) => {
     axios({
         method: 'post',
         url,
-        data: params
+        data: params,
+        headers: {
+          authorization: 'Bearer '.concat(USER.token)
+      }
       }).then((response) => {
         console.log('Gelen POST Başarılı: => ', response.data );
         dispatch({  type: success, payload: response.data  })
@@ -28,11 +31,13 @@ export const post = (url, params, dispatch, start, success, faild) => {
           RootNavigation.replace('Home')
           USER.token = response.data.token
           AsyncStorage.setItem(LOCAL_AUTH_ID, response.data.token)
+        } else if(method == 'addCharacter'){
+          RootNavigation.pop()
         }
 
       }).catch((err) => {
-        console.log('Gelen POST Hatalı: => ', err );
-        Alert.alert('UYARI', 'İstek sırasında bir sorun oluştu!')
+        console.log('Gelen POST Hatalı: => ', err.response.data );
+        Alert.alert('UYARI', err.response.data.message)
         dispatch({  type: faild  })
       })
 }
