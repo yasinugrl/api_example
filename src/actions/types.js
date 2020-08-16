@@ -16,3 +16,11 @@ export const REGISTER_FAILD = 'register_faild';
 export const LIST_START = 'list_start';
 export const LIST_SUCCESS = 'list_success';
 export const LIST_FAILD = 'list_faild';
+
+
+export const LOCAL_AUTH_ID = 'local_auth_id';
+
+
+export const USER = {
+    token: null
+};

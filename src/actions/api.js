@@ -4,10 +4,17 @@ import  { Alert } from 'react-native'
 
 import * as RootNavigation from '../RootNavigation';
 
+import AsyncStorage from '@react-native-community/async-storage'
+
+import { USER, LOCAL_AUTH_ID } from './types'
 
 
 export const post = (url, params, dispatch, start, success, faild) => {
     console.log('Giden URL => ', url);
+
+    const method = url.split('/').pop();
+    console.log('Method => ', method);
+
     dispatch({  type: start })
     axios({
         method: 'post',
@@ -17,7 +24,11 @@ export const post = (url, params, dispatch, start, success, faild) => {
         console.log('Gelen POST Başarılı: => ', response.data );
         dispatch({  type: success, payload: response.data  })
 
-        RootNavigation.replace('Home')
+        if(method == 'login' || method == 'register'){
+          RootNavigation.replace('Home')
+          USER.token = response.data.token
+          AsyncStorage.setItem(LOCAL_AUTH_ID, response.data.token)
+        }
 
       }).catch((err) => {
         console.log('Gelen POST Hatalı: => ', err );
@@ -28,13 +39,16 @@ export const post = (url, params, dispatch, start, success, faild) => {
 
 export const get = (url, params, dispatch, start, success, faild) => {
     console.log('Giden URL => ', url);
+    const method = url.split('/').pop();
+    console.log('Method => ', method);
 
     dispatch({  type: start })
+
     axios({
         method: 'get',
         url,
         headers: {
-            authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMzdiMzA3ODQxZGEwMDAxNzlhYWRkYyIsImlhdCI6MTU5NzQ4NjU3NywiZXhwIjoxNTk3NjU5Mzc3fQ.WuuTZJ6NuOjgzMlUaNzVSqdDwFI1zdhsoS8Sj8u2MVU'
+            authorization: 'Bearer '.concat(USER.token)
         }
       }).then((response) => {
         console.log('Gelen GET Başarılı: => ', response.data );

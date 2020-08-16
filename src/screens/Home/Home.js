@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
+import { View, Text, FlatList, Image, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getList } from '../../actions'
@@ -30,6 +30,9 @@ const Home = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
+            {props.loadingCharacter ? 
+            <ActivityIndicator size='large' /> : 
+            
             <FlatList
                 style={{ flex: 1 }}
                 data={props.characters}
@@ -49,7 +52,8 @@ const Home = (props) => {
                     )
                 }}
                 initialNumToRender={2}
-            />
+
+            />}
         </View>
     );
 }
